@@ -29,6 +29,16 @@ function App() {
 		const newTasks = [newTask, ...tasks]
 		setTasks(newTasks)
 	}
+	const changeTaskStatus  = (taskId:string, taskStatus:boolean) => {
+		debugger
+		const task = tasks.find(el=>el.id===taskId)
+		if(task){
+			task.isDone=taskStatus
+		}
+		setTasks([...tasks])
+	}
+
+
 	const removeTask = (id:string) => {
 		const filteredTasks=tasks.filter((el)=>el.id!== id)
 		setTasks(filteredTasks)
@@ -50,11 +60,16 @@ function App() {
 
 	return (
 		<div className="App">
-			<Todolist title="What to learn"
-					  addTask={addTask}
-					  tasks={taskForTodolist}
-					  removeTask={removeTask}
-					  changeFilter={changeFilter}/>
+			<div className="list">
+				<Todolist title="What to learn"
+						  addTask={addTask}
+						  tasks={taskForTodolist}
+						  removeTask={removeTask}
+						  changeFilter={changeFilter}
+						  changeTaskStatus ={changeTaskStatus}
+						  filter={filter}
+				/>
+			</div>
 		</div>
 	);
 }

@@ -1,0 +1,28 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0 auto;
+  line-height: 1.5;
+
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.App {
+  padding: 30px;
+  display: flex;
+  background-color: dimgray;
+  max-width: 100%;
+  width: auto;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+
+}
+
+.App > div {
+}

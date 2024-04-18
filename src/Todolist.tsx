@@ -1,6 +1,7 @@
 import {FilterType, TaskType} from "./App";
 import {Button} from "./Button";
 import {ChangeEvent, KeyboardEvent, useState} from "react";
+import AddItemForm from "./AddItemForm";
 
 type PropsType = {
     title: string
@@ -45,17 +46,18 @@ export const Todolist = ({title, tasks, todolistId, filter,  removeTask ,removeT
         changeFilter(filter, todolistId)
     }
 
+    const addItem = (value: string) =>{
+        addTask(value, todolistId)
+    }
+
     return (
         <div className="list">
-            <h3>{title}</h3>
-            <Button title={'x'} onClickHandler={removeTodolistHandler} />
             <div>
-                <input value={titleData} onChange={inputHandler} onKeyUp={addTaskOnKeyUpHandler}/>
-                <Button title={'+'} onClickHandler={addTaskHandler}/>
+                <h3>{title}</h3>
+                <Button title={'x'} onClickHandler={removeTodolistHandler}/>
             </div>
-            <div><span>
-                {error}
-            </span></div>
+            <AddItemForm addItem={addItem}/>
+
             {
                 tasks.length === 0
                     ? <p>Тасок нет</p>

@@ -87,6 +87,13 @@ function App() {
 		debugger
 		setTasks({[newItem.id]:[],...tasks})
 	}
+	const changeTitleTaskValue = (taskId: string, taskTitle:string, todolistId:string) =>{
+		setTasks({...tasks,
+			[todolistId]:tasks[todolistId].filter(el=>taskId===el.id?el.title=taskTitle:el)})
+	}
+	const changeTitleTodolist = (title:string, todolistId:string) =>{
+		setTodolists(todolists.map((t)=> t.id===todolistId?{...t, title}:t))
+	}
 
 
 	return (
@@ -110,6 +117,8 @@ function App() {
 								  removeTask={removeTask}
 								  changeFilter={changeFilter}
 								  changeTaskStatus ={changeTaskStatus}
+								  changeTitleTaskValue={changeTitleTaskValue}
+								  changeTitleTodolist={changeTitleTodolist}
 								  filter={tl.filter}
 								  removeTodolist={removeTodoList}
 						/>

@@ -1,24 +1,24 @@
 import React, {ChangeEvent, useState} from 'react';
-
+import TextField from '@mui/material/TextField';
 
 type EditableSpanType = {
     title: string
-    changeItemValue: (title:string) => void
-  }
+    changeItemValue: (title: string) => void
+}
 export const EditableSpan = (props: EditableSpanType) => {
 
     const [viewingValue, setEditingValue] = useState(true)
     const [inputValue, setInputValue] = useState('')
-    const changeOnEditStatus = ()=> {
+    const changeOnEditStatus = () => {
         setEditingValue(false)
         setInputValue(props.title)
 
     }
-    const changeOnViewStatus = ()=> {
+    const changeOnViewStatus = () => {
         setEditingValue(true)
         props.changeItemValue(inputValue)
     }
-    const changeInputValue = (el:ChangeEvent<HTMLInputElement>) => {
+    const changeInputValue = (el: ChangeEvent<HTMLInputElement>) => {
         debugger
         setInputValue(el.currentTarget.value)
 
@@ -26,8 +26,15 @@ export const EditableSpan = (props: EditableSpanType) => {
     return (
         <>
             {viewingValue
-            ? <span onDoubleClick={changeOnEditStatus}>{props.title}</span>
-            : <input value={inputValue} onBlur={changeOnViewStatus} onChange={changeInputValue}/>
+                ? <span onDoubleClick={changeOnEditStatus}>{props.title}</span>
+                : <TextField
+                    variant={'outlined'}
+                    value={inputValue}
+                    size={'small'}
+                    onChange={changeInputValue}
+                    onBlur={changeOnViewStatus}
+                    autoFocus
+                />
             }
         </>
     );

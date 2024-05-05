@@ -95,7 +95,6 @@ function App() {
             filter: 'all'
         }
         setTodolists([newItem, ...todolists])
-        debugger
         setTasks({[newItem.id]: [], ...tasks})
     }
     const changeTitleTaskValue = (taskId: string, taskTitle: string, todolistId: string) => {

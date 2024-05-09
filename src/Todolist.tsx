@@ -1,4 +1,3 @@
-import {FilterType, TaskType} from "./App";
 import {ChangeEvent, KeyboardEvent, useState} from "react";
 import AddItemForm from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
@@ -9,6 +8,7 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import {filterButtonsContainerSx, getListItemSx} from './Todolist.styles'
 import {Box} from "@mui/material";
+import {FilterType, TaskType} from "./AppWithRedux";
 
 
 type PropsType = {
@@ -17,7 +17,7 @@ type PropsType = {
     tasks: TaskType[]
     filter: string
     removeTask: (id: string, todolistId: string) => void
-    changeFilter: (value: FilterType, todolistId: string) => void
+    changeFilter: (todolistId: string, value: FilterType) => void
     addTask: (value: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, taskStatus: boolean, todolistId: string) => void
     changeTitleTaskValue: (taskId: string, taskTitle: string, todolistId: string) => void
@@ -65,7 +65,7 @@ export const Todolist = ({
         }
     }
     const changeFilterTasksHandler = (filter: FilterType) => {
-        changeFilter(filter, todolistId)
+        changeFilter(todolistId, filter)
     }
     const changeTitleTodolistHandler = (title: string) => {
         changeTitleTodolist(title, todolistId)

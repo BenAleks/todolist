@@ -4,18 +4,18 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import IconButton from '@mui/material/IconButton'
 
 
-
-
-
 type AddItemFormType = {
     addItem: (value:string) => void
 }
-const AddItemForm = (props: AddItemFormType) => {
 
+const AddItemForm = React.memo((props: AddItemFormType) => {
+console.log("AddItemForm")
     const [titleData, setTitleData] = useState('')
     const [error, setError] = useState('')
     const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    if (error !== null){
         setError('')
+    }
         setTitleData(event.currentTarget.value)
     }
 
@@ -50,9 +50,8 @@ const AddItemForm = (props: AddItemFormType) => {
                 <IconButton onClick={addTaskHandler} color={'primary'}>
                     <AddBoxIcon />
                 </IconButton>
-                <div><span> {error} </span></div>
             </div>
     );
-};
+});
 
 export default AddItemForm;

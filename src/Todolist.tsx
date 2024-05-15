@@ -1,4 +1,4 @@
-import {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
 import AddItemForm from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
@@ -26,7 +26,7 @@ type PropsType = {
 
 }
 
-export const Todolist = ({
+export const Todolist = React.memo(({
                              title,
                              changeTitleTaskValue,
                              changeTitleTodolist,
@@ -42,6 +42,8 @@ export const Todolist = ({
 
     const [titleData, setTitleData] = useState('')
     const [error, setError] = useState('')
+    console.log("Todolist called")
+
     const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setError('')
         setTitleData(event.currentTarget.value)
@@ -64,18 +66,24 @@ export const Todolist = ({
             addTaskHandler()
         }
     }
-    const changeFilterTasksHandler = (filter: FilterType) => {
+    const changeFilterTasksHandler = useCallback((filter: FilterType) => {
         changeFilter(todolistId, filter)
-    }
-    const changeTitleTodolistHandler = (title: string) => {
-        changeTitleTodolist(title, todolistId)
-    }
+    }, [changeFilter, todolistId])
+    const changeTitleTodolistHandler = useCallback((title: string) => {
+        changeTitleTodolist(todolistId, title)
+    }, [changeTitleTodolist, todolistId])
 
-    const addItem = (value: string) => {
+    const addItem = useCallback((value: string) => {
         addTask(value, todolistId)
+    },[addTask, todolistId])
+
+    let tasksForTodolist = tasks
+    if (filter === 'active') {
+        tasksForTodolist = tasks.filter((el) => !el.isDone)
     }
-
-
+    if (filter === 'completed') {
+        tasksForTodolist = tasks.filter((el) => el.isDone)
+    }
     return (
         <div className="list">
             <div className={"todolist-title-container"}>
@@ -89,7 +97,7 @@ export const Todolist = ({
                 tasks.length === 0
                     ? <p>Тасок нет</p>
                     : <List>
-                        {tasks.map((task) => {
+                        {tasksForTodolist.map((task) => {
                             const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
                                 changeTaskStatus(task.id, e.currentTarget.checked, todolistId)
 
@@ -124,4 +132,4 @@ export const Todolist = ({
 
         </div>
     )
-}
+})

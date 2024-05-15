@@ -46,7 +46,7 @@ const initialState:Array<TodolistType> = []
 export const todolistsReducer = (state: Array<TodolistType> = initialState , action: ActionsType) :Array<TodolistType>=> {
     switch (action.type) {
         case 'REMOVE-TODOLIST': {
-            return state.filter(tl => tl.id != action.payload.id) // логика по удалению тудулиста
+            return state.filter(tl => tl.id !== action.payload.id) // логика по удалению тудулиста
         }
         case 'ADD-TODOLIST': {
             return [{
@@ -56,7 +56,8 @@ export const todolistsReducer = (state: Array<TodolistType> = initialState , act
             }, ...state, ] // логика по добавлению тудулиста
         }
         case 'CHANGE-TODOLIST-TITLE': {
-            return state.map(tl => tl.id === action.payload.id? {...tl, title: action.payload.title}:tl) // логика по удалению тудулиста
+            return state.map(tl => tl.id === action.payload.id? {...tl, title: action.payload.title}:tl)
+
         }
         case 'CHANGE-TODOLIST-FILTER': {
             return state.map(tl => tl.id === action.payload.id? {...tl, filter: action.payload.filter}:tl) // логика по удалению тудулиста

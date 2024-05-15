@@ -3,12 +3,11 @@ import AddItemForm from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import {filterButtonsContainerSx, getListItemSx} from './Todolist.styles'
+import {filterButtonsContainerSx} from './Todolist.styles'
 import {Box} from "@mui/material";
 import {FilterType, TaskType} from "./AppWithRedux";
+import {Task} from "./Task";
 
 
 type PropsType = {
@@ -16,9 +15,9 @@ type PropsType = {
     todolistId: string
     tasks: TaskType[]
     filter: string
-    removeTask: (id: string, todolistId: string) => void
     changeFilter: (todolistId: string, value: FilterType) => void
     addTask: (value: string, todolistId: string) => void
+    removeTask: (id: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, taskStatus: boolean, todolistId: string) => void
     changeTitleTaskValue: (taskId: string, taskTitle: string, todolistId: string) => void
     changeTitleTodolist: (todolistTitle: string, todolistId: string) => void
@@ -97,27 +96,15 @@ export const Todolist = React.memo(({
                 tasks.length === 0
                     ? <p>Тасок нет</p>
                     : <List>
-                        {tasksForTodolist.map((task) => {
-                            const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                                changeTaskStatus(task.id, e.currentTarget.checked, todolistId)
+                        {tasksForTodolist.map((task) =>
+                            <Task
+                                changeTitleTaskValue={changeTitleTaskValue}
+                                task={task}
+                                removeTask={removeTask}
+                                changeTaskStatus={changeTaskStatus}
+                                todolistId={todolistId}
 
-                            }
-                            const changeItemValue = (taskTitle: string) => {
-                                changeTitleTaskValue(task.id, taskTitle, todolistId)
-                            }
-                            return (
-                                <ListItem
-                                    key={task.id}
-                                    sx={getListItemSx(task.isDone)}
-                                >
-                                    <div>
-                                        <Checkbox checked={task.isDone} onChange={onChangeHandler}/>
-                                        <EditableSpan title={task.title} changeItemValue={changeItemValue}/>
-                                    </div>
-                                    <DeleteTwoToneIcon onClick={() => removeTask(task.id, todolistId)}/>
-                                </ListItem>
-                            )
-                        })}
+                            />)}
                     </List>
             }
 
@@ -133,3 +120,4 @@ export const Todolist = React.memo(({
         </div>
     )
 })
+

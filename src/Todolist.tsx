@@ -1,5 +1,4 @@
 import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
-import AddItemForm from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import Button from '@mui/material/Button';
@@ -8,6 +7,7 @@ import {filterButtonsContainerSx} from './Todolist.styles'
 import {Box} from "@mui/material";
 import {FilterType, TaskType} from "./AppWithRedux";
 import {Task} from "./Task";
+import {AddItemForm} from "./AddItemForm";
 
 
 type PropsType = {
@@ -98,7 +98,7 @@ export const Todolist = React.memo(({
                     : <List>
                         {tasksForTodolist.map((task) =>
                             <Task
-                                changeTitleTaskValue={changeTitleTaskValue}
+                                changeTaskTitle={changeTitleTaskValue}
                                 task={task}
                                 removeTask={removeTask}
                                 changeTaskStatus={changeTaskStatus}

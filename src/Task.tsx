@@ -9,7 +9,7 @@ import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 type TaskPropsType = {
     removeTask: (id: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, taskStatus: boolean, todolistId: string) => void
-    changeTitleTaskValue: (taskId: string, taskTitle: string, todolistId: string) => void
+    changeTaskTitle: (taskId: string, taskTitle: string, todolistId: string) => void
     todolistId: string
     task: TaskType
 
@@ -20,8 +20,8 @@ export const Task = memo((props: TaskPropsType) => {
 
     },[props.changeTaskStatus, props.task.id, props.todolistId])
     const changeItemValue = useCallback((taskTitle: string) => {
-        props.changeTitleTaskValue(props.task.id, taskTitle, props.todolistId)
-    },[props.changeTitleTaskValue, props.task.id, props.todolistId])
+        props.changeTaskTitle(props.task.id, taskTitle, props.todolistId)
+    },[props.changeTaskTitle, props.task.id, props.todolistId])
     return (
         <ListItem
             key={props.task.id}

@@ -2,6 +2,9 @@ import axios from 'axios'
 
 const settings = {
     withCredentials: true,
+    headers:{
+        'API-KEY':'edb5eef2-80b8-4748-a0c6-a08543f85a90'
+    }
 }
 
 export const todolistAPI = {

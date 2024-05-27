@@ -7,6 +7,9 @@ export default {
 }
 const settings = {
   withCredentials: true,
+  headers:{
+    'API-KEY':'edb5eef2-80b8-4748-a0c6-a08543f85a90'
+  }
 }
 
 export const GetTodolists = () => {
@@ -38,7 +41,7 @@ export const CreateTodolist = () => {
 
 export const DeleteTodolist = () => {
   const [state, setState] = useState<any>(null)
-  const todolistId = 'c750e0b8-a103-431c-9873-f86ecaa03fd3'
+  const todolistId = 'a1631708-061f-41a0-abc2-e83826adf040'
 
   useEffect(() => {
     axios
@@ -53,10 +56,10 @@ export const DeleteTodolist = () => {
 
 export const UpdateTodolistTitle = () => {
   const [state, setState] = useState<any>(null)
-  const todolistId = '5a6e4e35-f5d0-4587-a8e5-52d6f24d0d17'
+  const todolistId = '5becf775-aae6-4efe-beee-e06d03c7417d'
 
   useEffect(() => {
-    const todolistId = 'd6e91e44-5933-4765-877a-bee86a7a2cc0'
+    const todolistId = '5becf775-aae6-4efe-beee-e06d03c7417d'
     todolistAPI.updateTodolist(todolistId, 'SOME NEW TITLE').then(res => {
       setState(res.data)
     })
